@@ -60,6 +60,9 @@ export class TodosService {
   }
 
   remove(id: UUID) {
-    return `This action removes a #${id} todo`;
+    const updatedTodos = this.todos.filter((todo) => todo.id !== id);
+    this.todos = updatedTodos;
+
+    return this.todos;
   }
 }
