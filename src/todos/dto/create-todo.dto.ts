@@ -1,14 +1,10 @@
-import { IsBoolean, IsNotEmpty } from 'class-validator';
-import { UUID } from 'crypto';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateTodoDto {
   @IsNotEmpty()
   todo: string;
 
-  @IsBoolean()
-  completed: boolean;
+  startAt: Date | null;
 
-  id: UUID;
-  createdAt: Date;
-  updatedAt: Date;
+  endAt: Date | null;
 }

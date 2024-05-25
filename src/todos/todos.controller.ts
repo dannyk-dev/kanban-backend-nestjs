@@ -1,45 +1,25 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
-import { CreateTodoPipePipe } from './pipe/create-todo.pipe';
 import { UUID } from 'crypto';
-// import { Todo } from 'src/utils/types';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todos')
 export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   @Post()
-  create(@Body(CreateTodoPipePipe) todoData: CreateTodoDto) {
-    return this.todosService.create(todoData);
+  create(@Body() todoData: CreateTodoDto) {
+    return this.todosService.createTodo(todoData);
   }
 
   @Get()
-  findAll() {
-    return this.todosService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: UUID) {
-    return this.todosService.findOne(id);
+  getTodos() {
+    return this.todosService.getAllTodos();
   }
 
   @Patch(':id')
-  update(@Param('id') id: UUID, @Body() updateTodoDto: UpdateTodoDto) {
-    return this.todosService.update(id, updateTodoDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: UUID) {
-    return this.todosService.remove(id);
+  updateTodo(@Param('id') todoId: UUID, @Body() updateTodoDTO: UpdateTodoDto) {
+    return this.todosService.updateTodo(todoId, updateTodoDTO);
   }
 }

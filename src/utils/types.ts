@@ -1,9 +1,12 @@
-import { UUID } from 'crypto';
+export type TodoParams = {
+  todo: string;
+  startAt: Date | null;
+  endAt: Date | null;
+};
 
-export type Todo = {
-  id: UUID;
+export type UpdateTodoParams = {
   todo: string;
   completed: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  startAt: Date;
+  endAt: Date;
 };
