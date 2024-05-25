@@ -1,5 +1,6 @@
 import { randomUUID, UUID } from 'crypto';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { TodoGroup } from './TodoGroup.entity';
 
 @Entity('todos')
 export class Todo {
@@ -20,4 +21,7 @@ export class Todo {
 
   @Column({ nullable: true })
   endAt: Date;
+
+  @ManyToOne(() => TodoGroup, (group) => group.todos)
+  group: TodoGroup;
 }

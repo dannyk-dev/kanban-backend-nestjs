@@ -34,4 +34,8 @@ export class TodosService {
       },
     );
   }
+
+  deleteTodo(id: UUID) {
+    return this.todoRepository.delete({ id });
+  }
 }

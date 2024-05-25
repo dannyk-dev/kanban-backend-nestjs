@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Todo } from './entities/Todo.entity';
+import { TodoGroupModule } from './todo-group/todo-group.module';
+import { TodoGroupService } from './todo-group/todo-group.service';
+import { TodoGroup } from './entities/TodoGroup.entity';
 
 @Module({
   imports: [
@@ -14,12 +17,13 @@ import { Todo } from './entities/Todo.entity';
       username: 'root',
       password: 'dankai1973',
       database: 'todo_list',
-      entities: [Todo],
+      entities: [Todo, TodoGroup],
       synchronize: true,
     }),
     TodosModule,
+    TodoGroupModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TodoGroupService],
 })
 export class AppModule {}
