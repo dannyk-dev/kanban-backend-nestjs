@@ -2,7 +2,7 @@ import { randomUUID, UUID } from 'crypto';
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Todo } from './Todo.entity';
 
-@Entity('todo-group')
+@Entity('todo_group')
 export class TodoGroup {
   @PrimaryColumn({ type: 'uuid', default: randomUUID() })
   id: UUID;

@@ -10,3 +10,8 @@ export type UpdateTodoParams = {
   startAt: Date;
   endAt: Date;
 };
+
+export type TodoGroupParams = {
+  title: string;
+  description: string;
+};

@@ -8,31 +8,56 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
-import { CreateTodoDto } from './dto/create-todo.dto';
 import { UUID } from 'crypto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { CreateTodoGroupDto } from './dto/CreateTodoGroup.dto';
+import { CreateTodoDto } from './dto/create-todo.dto';
+import { UpdateTodoGroupDTO } from './dto/UpdateTodoGroup.dto';
 
 @Controller('todos')
 export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   @Post()
-  create(@Body() todoData: CreateTodoDto) {
-    return this.todosService.createTodo(todoData);
+  createTodoGroup(@Body() todoData: CreateTodoGroupDto) {
+    return this.todosService.createTodoGroup(todoData);
+  }
+
+  @Post(':groupId')
+  createTodo(
+    @Param('groupId') groupId: UUID,
+    @Body() createTodoBody: CreateTodoDto,
+  ) {
+    return this.todosService.createTodo(groupId, createTodoBody);
   }
 
   @Get()
   getTodos() {
-    return this.todosService.getAllTodos();
+    return this.todosService.getTodoGroups();
   }
 
-  @Patch(':id')
-  updateTodo(@Param('id') todoId: UUID, @Body() updateTodoDTO: UpdateTodoDto) {
-    return this.todosService.updateTodo(todoId, updateTodoDTO);
+  @Get(':groupId')
+  getTodoItems(@Param('groupId') groupId: UUID) {
+    return this.todosService.getTodosByGroup(groupId);
   }
 
-  @Delete(':id')
-  deleteTodo(@Param('id') todoId: UUID) {
-    return this.todosService.deleteTodo(todoId);
+  @Patch(':groupId')
+  updateTodoGroup(
+    @Param('groupId') groupId: UUID,
+    @Body() updateGroupData: UpdateTodoGroupDTO,
+  ) {
+    return this.todosService.updateTodoGroup(groupId, updateGroupData);
   }
+
+  @Patch(':groupId/:todoId')
+  updateTodo(
+    @Param('groupId') groupId: UUID,
+    @Param('todoId') todoId: UUID,
+    updateTodoData: UpdateTodoDto,
+  ) {
+    return this.todosService.updateTodoItem(groupId, todoId, updateTodoData);
+  }
+
+  // @Delete(':id')
+  // deleteTodoGroup(@Param('id') todoId: UUID) {}
 }
