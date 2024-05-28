@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { TodosService } from './todos.service';
-import { TodosController } from './todos.controller';
+import { TodosController } from './controllers/todos.controller';
+import { TodosService } from './services/todos.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Todo } from 'src/entities/Todo.entity';
 import { TodoGroup } from 'src/entities/TodoGroup.entity';

@@ -13,5 +13,10 @@ export type UpdateTodoParams = {
 
 export type TodoGroupParams = {
   title: string;
-  description: string;
+  description?: string;
+};
+
+export type UpdateTodoGroupParams = {
+  title?: string;
+  description?: string;
 };
