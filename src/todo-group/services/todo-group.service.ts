@@ -42,10 +42,23 @@ export class TodoGroupService {
   }
 
   async deleteTodoGroup(groupId: UUID): Promise<void> {
-    const deleteResult = await this.todoGroupRepository.delete({ id: groupId });
+    try {
+      const deleteResult = await this.todoGroupRepository.delete({
+        id: groupId,
+      });
 
-    if (deleteResult.affected === 0) {
-      throw new HttpException('Todo group was not found', HttpStatus.NOT_FOUND);
+      if (deleteResult.affected === 0) {
+        throw new HttpException(
+          'Todo group was not found',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(
+        'Failure in deleting group',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

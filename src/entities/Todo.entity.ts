@@ -22,6 +22,10 @@ export class Todo {
   @Column({ nullable: true })
   endAt: Date;
 
-  @ManyToOne(() => TodoGroup, (group) => group.todos)
+  @ManyToOne(() => TodoGroup, (group) => group.todos, {
+    cascade: true,
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   group: TodoGroup;
 }
