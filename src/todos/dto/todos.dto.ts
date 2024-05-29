@@ -9,13 +9,21 @@ import {
 export class CreateTodoDto {
   @IsNotEmpty()
   @IsString()
-  task: string;
+  todo: string;
+
+  @IsOptional()
+  @IsDate()
+  startAt: Date;
+
+  @IsOptional()
+  @IsDate()
+  endAt: Date;
 }
 
 export class UpdateTodoDto {
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  task: string;
+  todo: string;
 
   @IsOptional()
   @IsBoolean()

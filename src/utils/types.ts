@@ -6,9 +6,9 @@ export type TodoParams = {
 
 export type UpdateTodoParams = {
   todo: string;
-  completed: boolean;
-  startAt: Date;
-  endAt: Date;
+  completed?: boolean;
+  startAt?: Date;
+  endAt?: Date;
 };
 
 export type TodoGroupParams = {
